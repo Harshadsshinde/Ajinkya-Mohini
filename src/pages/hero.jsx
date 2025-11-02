@@ -308,7 +308,7 @@ const handleNavClick = (sectionId) => {
           <AnimatePresence>
             {isMenuOpen && (
               <motion.div
-                className="md:hidden bg-cream/98 backdrop-blur-lg text-black border-t border-gold/20 absolute top-full left-0 right-0 shadow-lg"
+                className="md:hidden bg-cream/98 bg-white backdrop-blur-lg text-black border-t border-gold/20 absolute top-full left-0 right-0 shadow-lg"
                 initial={{ opacity: 0, height: 0 }}
                 animate={{ opacity: 1, height: "auto" }}
                 exit={{ opacity: 0, height: 0 }}
