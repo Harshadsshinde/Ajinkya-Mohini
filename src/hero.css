@@ -1,0 +1,81 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=Work+Sans:wght@300;400;500;600&display=swap');
+
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.flip-clock {
+  font-family: 'Work Sans', sans-serif;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #FFF8F0;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #D4AF37;
+  border-radius: 3px;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+.flip-clock {
+  transform: scale(0.7);
+  transform-origin: center;
+}
+
+@media (min-width: 768px) {
+  .flip-clock {
+    transform: scale(1);
+  }
+}
+/* FlipClock Styles */
+.flip-clock {
+  transform: scale(0.7);
+  transform-origin: center;
+}
+
+@media (min-width: 768px) {
+  .flip-clock {
+    transform: scale(1);
+  }
+}
+
+/* Custom FlipClock styling to match wedding theme */
+.flip-clock-wrapper ul {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+}
+
+.flip-clock-wrapper ul li a div div.inn {
+  background: #D4AF37;
+  color: white;
+}
+
+.flip-clock-dot {
+  background: #D4AF37;
+}
+
+.flip-clock-wrapper .flip-clock-label {
+  color: white;
+  font-weight: 600;
+}
