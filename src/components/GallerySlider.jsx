@@ -1,41 +1,30 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import img1 from '../assets/img1.jpg';
+import img2 from '../assets/img2.jpg';
+import img3 from '../assets/img3.jpg';
+import img4 from '../assets/img4.jpg';
+import img5 from '../assets/img5.jpg';
+import img6 from '../assets/img6.jpg';
+import img7 from '../assets/img7.jpg';
+import img8 from '../assets/img8.jpg';
 
-const StackedGallerySlider = () => {
+const GallerySlider = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
   const [isMobile, setIsMobile] = useState(false);
 
   const galleryImages = [
-    { 
-      id: 1, 
-      src: 'https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=600', 
-      alt: 'Our First Meeting',
-      caption: 'First Sparks',
-      date: '2020'
-    },
-    { 
-      id: 2, 
-      src: 'https://images.unsplash.com/photo-1511895426328-dc8714191300?w=600', 
-      alt: 'Engagement Day',
-      caption: 'She Said Yes',
-      date: '2021'
-    },
-    { 
-      id: 3, 
-      src: 'https://images.unsplash.com/photo-1537633552985-df8429e8048b?w=600', 
-      alt: 'Special Moments',
-      caption: 'Adventures Together',
-      date: '2022'
-    },
-    { 
-      id: 4, 
-      src: 'https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=600', 
-      alt: 'Together Forever',
-      caption: 'Perfect Moments',
-      date: '2023'
-    }
-  ];
+  { id: 1, src: img1, alt: 'Our First Meeting', caption: 'First Sparks', date: '2020' },
+  { id: 2, src: img2, alt: 'Engagement Day', caption: 'She Said Yes', date: '2021' },
+  { id: 3, src: img3, alt: 'Special Moments', caption: 'Adventures Together', date: '2022' },
+  { id: 4, src: img4, alt: 'Together Forever', caption: 'Perfect Moments', date: '2023' },
+  { id: 5, src: img5, alt: 'Family Celebration', caption: 'With Loved Ones', date: '2023' },
+  { id: 6, src: img6, alt: 'Trip Memories', caption: 'Joyful Times', date: '2024' },
+  { id: 7, src: img7, alt: 'Pre-Wedding Shoot', caption: 'Romantic Vibes', date: '2024' },
+  { id: 8, src: img8, alt: 'Big Day', caption: 'Forever Begins', date: '2025' },
+];
+
 
   // Check mobile screen size
   useEffect(() => {
@@ -162,7 +151,6 @@ const StackedGallerySlider = () => {
                         animate={{ y: 0, opacity: 1 }}
                         transition={{ delay: 0.3 }}
                       >
-                        {image.caption}
                       </motion.h3>
                       {image.position === 'center' && (
                         <motion.p 
@@ -292,4 +280,4 @@ const StackedGallerySlider = () => {
   );
 };
 
-export default StackedGallerySlider;
+export default GallerySlider;

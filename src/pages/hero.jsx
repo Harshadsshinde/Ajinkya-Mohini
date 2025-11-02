@@ -63,26 +63,27 @@ const opacity = useTransform(scrollYProgress, [0, 1.5], [1, 0]);
     <>
       <div className="min-h-screen bg-cream font-simple">
         {/* Navigation */}
-        <motion.nav
-          className="fixed top-0 w-full z-50 bg-cream/90 backdrop-blur-sm shadow-sm"
-          initial={{ y: -100 }}
-          animate={{ y: 0 }}
-          transition={{ duration: 0.8 }}
+       <motion.nav
+  className="fixed top-0 w-full z-50 bg-cream/90 backdrop-blur-sm shadow-sm overflow-x-hidden"
+  initial={{ y: -100 }}
+  animate={{ y: 0 }}
+  transition={{ duration: 0.8 }}
+>
+  <div className="container mx-auto px-4 py-3">
+    <div className="flex flex-wrap justify-center gap-6 md:gap-12 text-center">
+      {["HOME", "EVENTS", "GALLERY", "How We Met", "HIGHLIGHTS"].map((item) => (
+        <a
+          key={item}
+          href={`#${item.toLowerCase()}`}
+          className="text-navy hover:text-gold transition-all duration-300 font-semibold tracking-wider text-xs md:text-sm uppercase"
         >
-          <div className="container mx-auto px-6 py-4">
-            <div className="flex justify-center space-x-12">
-              {["HOME", "EVENTS", "GALLERY", "HIGHLIGHTS"].map((item) => (
-                <a
-                  key={item}
-                  href={`#${item.toLowerCase()}`}
-                  className="text-navy hover:text-gold transition-all duration-300 font-semibold tracking-wider text-sm uppercase"
-                >
-                  {item}
-                </a>
-              ))}
-            </div>
-          </div>
-        </motion.nav>
+          {item}
+        </a>
+      ))}
+    </div>
+  </div>
+</motion.nav>
+
 
         {/* Hero Section with Parallax */}
         <section
@@ -232,9 +233,9 @@ const opacity = useTransform(scrollYProgress, [0, 1.5], [1, 0]);
                   title: "Haldi & Mehndi",
                   date: "November 30, 2025",
                   time: "9:00 AM",
-                  location: "Darashiv",
-                  address: "Darashiv, Maharashtra 413802",
-                  mapQuery: "Darashiv,+Maharashtra",
+                  location: "Shree Ganesh Mangal Karyalay Dharashiv",
+                  address: "Shree Ganesh Mangal Karyalay Dharashiv, Maharashtra 413802",
+                  mapQuery:  "Shree Ganesh Mangal Karyalay Dharashiv, Maharashtra 413802",
                   description:
                     "Traditional Haldi and Mehndi ceremonies with family and close friends",
                 },
@@ -242,9 +243,9 @@ const opacity = useTransform(scrollYProgress, [0, 1.5], [1, 0]);
                   title: "Wedding Ceremony",
                   date: "November 30, 2025",
                   time: "12:00 PM",
-                  location: "Darashiv",
-                  address: "Darashiv, Maharashtra 413802",
-                  mapQuery: "Darashiv,+Maharashtra",
+                  location: "Shree Ganesh Mangal Karyalay Dharashiv",
+                  address: "Shree Ganesh Mangal Karyalay Dharashiv, Maharashtra 413802",
+                  mapQuery:  "Shree Ganesh Mangal Karyalay Dharashiv, Maharashtra 413802",
                   description:
                     "Traditional Maharashtrian wedding ceremony followed by reception",
                 },
@@ -353,7 +354,7 @@ const opacity = useTransform(scrollYProgress, [0, 1.5], [1, 0]);
         </section>
        
         <GallerySlider />
-        {/* <HowWeMet/> */}
+        <HowWeMet/>
         <VideoBackground />
        
         {/* Highlights Section */}
