@@ -16,13 +16,13 @@ const GallerySlider = () => {
 
   const galleryImages = [
   { id: 1, src: img1, alt: 'Our First Meeting', caption: 'First Sparks', date: '2020' },
-  { id: 2, src: img2, alt: 'Engagement Day', caption: 'She Said Yes', date: '2021' },
-  { id: 3, src: img3, alt: 'Special Moments', caption: 'Adventures Together', date: '2022' },
-  { id: 4, src: img4, alt: 'Together Forever', caption: 'Perfect Moments', date: '2023' },
-  { id: 5, src: img5, alt: 'Family Celebration', caption: 'With Loved Ones', date: '2023' },
-  { id: 6, src: img6, alt: 'Trip Memories', caption: 'Joyful Times', date: '2024' },
+  { id: 2, src: img3, alt: 'Engagement Day', caption: 'She Said Yes', date: '2021' },
+  { id: 3, src: img4, alt: 'Special Moments', caption: 'Adventures Together', date: '2022' },
+  { id: 4, src: img6, alt: 'Together Forever', caption: 'Perfect Moments', date: '2023' },
+  { id: 5, src: img8, alt: 'Family Celebration', caption: 'With Loved Ones', date: '2023' },
+  { id: 6, src: img2, alt: 'Trip Memories', caption: 'Joyful Times', date: '2024' },
   { id: 7, src: img7, alt: 'Pre-Wedding Shoot', caption: 'Romantic Vibes', date: '2024' },
-  { id: 8, src: img8, alt: 'Big Day', caption: 'Forever Begins', date: '2025' },
+  { id: 8, src: img5, alt: 'Big Day', caption: 'Forever Begins', date: '2025' },
 ];
 
 

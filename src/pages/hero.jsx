@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform , AnimatePresence } from "framer-motion";
 import bgImage from "../assets/bg.jpg";
 import FlipClock from "../components/FlipClock";
 import MapComponent from "./MapComponent";
@@ -12,11 +12,17 @@ import "@fontsource/playfair-display";
 import "@fontsource/lora";
 import VideoBackground from "../components/VideoBackground";
 import HowWeMet from "../components/HowWeMet";
+import haldiImg from "../assets/haldhi1.png";
+import wedding from "../assets/wedding1.png";
+import mehandi from "../assets/mehandi1.png";
+import sangeet from "../assets/sangeet.png";
+
 
 function Hero() {
   const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
   const heroRef = useRef(null);
-  
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   const { scrollYProgress } = useScroll({
     target: heroRef,
     offset: ["start start", "end start"]
@@ -57,33 +63,278 @@ const opacity = useTransform(scrollYProgress, [0, 1.5], [1, 0]);
 
     return () => clearTimeout(timer);
   });
+  
+  
+  
 
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
+  const closeMenu = () => {
+    setIsMenuOpen(false);
+  };
+
+  // Handle navigation click
+const handleNavClick = (sectionId) => {
+  // Close the mobile menu first
+  setIsMenuOpen(false);
+
+  // Wait a short delay for the animation to finish before scrolling
+  setTimeout(() => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      const yOffset = -70; // navbar height offset
+      const y =
+        element.getBoundingClientRect().top + window.scrollY + yOffset;
+      window.scrollTo({ top: y, behavior: "smooth" });
+    }
+  }, 350); // matches AnimatePresence transition duration
+};
+
+
+  function calculateTimeLeft() {
+    const weddingDate = new Date("2025-11-30");
+    const now = new Date();
+    const difference = weddingDate - now;
+
+    if (difference > 0) {
+      return {
+        days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+        hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
+        minutes: Math.floor((difference / 1000 / 60) % 60),
+        seconds: Math.floor((difference / 1000) % 60),
+      };
+    }
+    return { days: 0, hours: 0, minutes: 0, seconds: 0 };
+  }
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setTimeLeft(calculateTimeLeft());
+    }, 1000);
+
+    return () => clearTimeout(timer);
+  });
+
+  const menuItems = [
+    { name: "HOME", id: "home" },
+    { name: "EVENTS", id: "events" },
+    { name: "GALLERY", id: "gallery" },
+    { name: "HOW WE MET", id: "how we met" },
+    { name: "HIGHLIGHTS", id: "highlights" }
+  ];
+   const events = [
+    {
+      title: "Mehndi",
+      date: "November 28, 2025",
+      time: "6:00 PM",
+      location: "'NATHSAGAR', College Road, Washi, Dist-Dharashiv 413 503",
+      address: "College Road Washi, Dist-Dharashiv 413 503",
+      mapQuery: "College Road Washi, Dist-Dharashiv 413 503",
+      description: "Traditional Mehndi ceremony with intricate henna designs, music, and celebrations with family and close friends.",
+      icon: "Mehndi",
+      color: "from-amber-500 to-orange-500",
+      textColor: "text-amber-700"
+    },
+    {
+      title: "Sangeet",
+      date: "November 29, 2025",
+      time: "5:00 PM",
+      location: "'NATHSAGAR', College Road, Washi, Dist-Dharashiv 413 503",
+      address: "College Road Washi, Dist-Dharashiv 413 503",
+      mapQuery: "College Road Washi, Dist-Dharashiv 413 503",
+      description: "An evening of music, dance performances, and celebration where families come together for a night of entertainment.",
+      icon: "Sangeet",
+      color: "from-purple-500 to-pink-500",
+      textColor: "text-purple-700"
+    },
+    {
+      title: "Haldi",
+      date: "November 30, 2025",
+      time: "6:00 AM",
+      location: "Shree Ganesh Mangal Karyalay Dharashiv",
+      address: "Shree Ganesh Mangal Karyalay Dharashiv, Maharashtra 413802",
+      mapQuery: "Shree Ganesh Mangal Karyalay Dharashiv, Maharashtra 413802",
+      description: "Traditional Haldi ceremony where turmeric paste is applied for purification and blessings before the wedding.",
+      icon: "Haldi",
+      color: "from-yellow-400 to-amber-400",
+      textColor: "text-yellow-700"
+    },
+    {
+      title: "Wedding",
+      date: "November 30, 2025",
+      time: "12:23 PM",
+      location: "Shree Ganesh Mangal Karyalay Dharashiv",
+      address: "Shree Ganesh Mangal Karyalay Dharashiv, Maharashtra 413802",
+      mapQuery: "Shree Ganesh Mangal Karyalay Dharashiv, Maharashtra 413802",
+      description: "Traditional Maharashtrian wedding ceremony with sacred rituals, followed by reception and celebrations.",
+      icon: "Wedding",
+      color: "from-red-500 to-rose-500",
+      textColor: "text-red-700"
+    }
+  ];
+
+  // Custom SVG Icons for each event
+  const EventIcons = {
+    Mehndi: (
+      <svg viewBox="0 0 100 100" className="w-16 h-16">
+      <image href={mehandi} width="100" height="100" background="transparent" />
+    </svg>
+    ),
+    Sangeet: (
+      <svg viewBox="0 0 100 100" className="w-16 h-16">
+      <image href={sangeet} width="100" height="100" background="transparent" />
+    </svg>
+    ),
+    Haldi: (
+    <svg viewBox="0 0 100 100" className="w-16 h-16">
+      <image href={haldiImg} width="100" height="100" background="transparent" />
+    </svg>
+    ),
+    Wedding: (
+      <svg viewBox="0 0 100 100" className="w-16 h-16">
+      <image href={wedding} width="100" height="100" background="transparent" />
+    </svg>
+    )
+  };
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2
+      }
+    }
+  };
+
+  const cardVariants = {
+    hidden: { 
+      opacity: 0, 
+      y: 50,
+      scale: 0.8
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      transition: {
+        type: "spring",
+        stiffness: 100,
+        damping: 15
+      }
+    }
+  };
+
+  const iconVariants = {
+    hidden: { scale: 0, rotate: -180 },
+    visible: {
+      scale: 1,
+      rotate: 0,
+      transition: {
+        type: "spring",
+        stiffness: 200,
+        delay: 0.3
+      }
+    },
+    hover: {
+      scale: 1.2,
+      rotate: 10,
+      transition: {
+        type: "spring",
+        stiffness: 400
+      }
+    }
+  };
   
   return (
     <>
-      <div className="min-h-screen bg-cream font-simple">
-        {/* Navigation */}
-       <motion.nav
-  className="fixed top-0 w-full z-50 bg-cream/90 backdrop-blur-sm shadow-sm overflow-x-hidden"
-  initial={{ y: -100 }}
-  animate={{ y: 0 }}
-  transition={{ duration: 0.8 }}
->
-  <div className="container mx-auto px-4 py-3">
-    <div className="flex flex-wrap justify-center gap-6 md:gap-12 text-center">
-      {["HOME", "EVENTS", "GALLERY", "How We Met", "HIGHLIGHTS"].map((item) => (
-        <a
-          key={item}
-          href={`#${item.toLowerCase()}`}
-          className="text-navy hover:text-gold transition-all duration-300 font-semibold tracking-wider text-xs md:text-sm uppercase"
+         <div className="min-h-screen bg-cream font-simple overflow-x-hidden">
+        {/* Navigation - Fixed Responsive Menu */}
+        <motion.nav
+          className="fixed top-0 w-full z-50 bg-cream/95 backdrop-blur-sm shadow-sm"
+          initial={{ y: -100 }}
+          animate={{ y: 0 }}
+          transition={{ duration: 0.8 }}
         >
-          {item}
-        </a>
-      ))}
-    </div>
-  </div>
-</motion.nav>
+          <div className="container mx-auto px-4 py-3">
+            {/* Desktop Menu - Hidden on mobile */}
+            <div className="hidden md:flex flex-wrap justify-center gap-6 md:gap-12 text-center">
+              {menuItems.map((item) => (
+                <button
+                  key={item.id}
+                  onClick={() => handleNavClick(item.id)}
+                  className="text-navy hover:text-gold transition-all duration-300 font-semibold tracking-wider text-sm uppercase"
+                >
+                  {item.name}
+                </button>
+              ))}
+            </div>
 
+            {/* Mobile Menu Button - Hidden on desktop */}
+            <div className="flex md:hidden justify-between items-center">
+              <div className="text-navy font-semibold text-lg">
+                A❤M
+              </div>
+              <button
+                onClick={toggleMenu}
+                className="text-navy hover:text-gold transition-all duration-300 p-2 relative z-60"
+                aria-label="Toggle menu"
+              >
+                {/* Hamburger Icon - Fixed visibility */}
+                <div className="w-6 h-6 flex flex-col justify-between relative">
+                  <motion.span
+                    className="w-6 h-0.5 bg-black rounded-full block"
+                    animate={isMenuOpen ? { rotate: 45, y: 8 } : { rotate: 0, y: 0 }}
+                    transition={{ duration: 0.3 }}
+                  />
+                  <motion.span
+                    className="w-6 h-0.5 bg-black rounded-full block"
+                    animate={isMenuOpen ? { opacity: 0 } : { opacity: 1 }}
+                    transition={{ duration: 0.3 }}
+                  />
+                  <motion.span
+                    className="w-6 h-0.5 bg-black rounded-full block"
+                    animate={isMenuOpen ? { rotate: -45, y: -8 } : { rotate: 0, y: 0 }}
+                    transition={{ duration: 0.3 }}
+                  />
+                </div>
+              </button>
+            </div>
+          </div>
+
+          {/* Mobile Menu Dropdown */}
+          <AnimatePresence>
+            {isMenuOpen && (
+              <motion.div
+                className="md:hidden bg-cream/98 bg-white backdrop-blur-lg text-black border-t border-gold/20 absolute top-full left-0 right-0 shadow-lg"
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: "auto" }}
+                exit={{ opacity: 0, height: 0 }}
+                transition={{ duration: 0.3 }}
+              >
+                <div className="container mx-auto px-4 py-4">
+                  <div className="flex flex-col space-y-3">
+                    {menuItems.map((item, index) => (
+                      <motion.button
+                        key={item.id}
+                        onClick={() => handleNavClick(item.id)}
+                        className="text-navy hover:text-gold transition-all duration-300 font-semibold tracking-wider text-base uppercase py-3 border-b border-gold/10 text-left"
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: index * 0.1 }}
+                        whileHover={{ x: 10 }}
+                      >
+                        {item.name}
+                      </motion.button>
+                    ))}
+                  </div>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </motion.nav>
 
         {/* Hero Section with Parallax */}
         <section
@@ -145,7 +396,7 @@ const opacity = useTransform(scrollYProgress, [0, 1.5], [1, 0]);
                 animate={{ opacity: 1 }}
                 transition={{ delay: 1, duration: 1 }}
               >
-                <div className="flex justify-center  ml-1 mr-1 space-x-4 md:space-x-8">
+                <div className="flex justify-center ml-1 mr-1 space-x-4 md:space-x-8">
                   {Object.entries(timeLeft).map(([unit, value]) => (
                     <div key={unit} className="text-center">
                       <div className="bg-white/20 backdrop-blur-sm rounded-lg p-4 min-w-20">
@@ -217,83 +468,146 @@ const opacity = useTransform(scrollYProgress, [0, 1.5], [1, 0]);
           id="events"
           className="py-20 px-6 bg-gradient-to-b from-cream to-white"
         >
-          <div className="container mx-auto max-w-6xl">
-            <motion.h2
-              className="text-5xl md:text-6xl font-cursive text-center text-maroon mb-16"
-              initial={{ y: 50, opacity: 0 }}
-              whileInView={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.8 }}
+          
+      <div className="container mx-auto max-w-6xl">
+        <motion.h2
+          className="text-5xl md:text-6xl mb-1 font-cursive text-center text-maroon mb-4"
+          initial={{ y: 50, opacity: 0 }}
+          whileInView={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.8 }}
+        >
+          Events
+        </motion.h2>
+
+       
+
+        <motion.div
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+        >
+          {events.map((event, index) => (
+            <motion.div
+              key={index}
+              className="group relative"
+              variants={cardVariants}
+              whileHover={{ y: -15 }}
             >
-              Events
-            </motion.h2>
-
-            <div className="grid md:grid-cols-2 gap-12">
-              {[
-                {
-                  title: "Haldi & Mehndi",
-                  date: "November 30, 2025",
-                  time: "9:00 AM",
-                  location: "Shree Ganesh Mangal Karyalay Dharashiv",
-                  address: "Shree Ganesh Mangal Karyalay Dharashiv, Maharashtra 413802",
-                  mapQuery:  "Shree Ganesh Mangal Karyalay Dharashiv, Maharashtra 413802",
-                  description:
-                    "Traditional Haldi and Mehndi ceremonies with family and close friends",
-                },
-                {
-                  title: "Wedding Ceremony",
-                  date: "November 30, 2025",
-                  time: "12:00 PM",
-                  location: "Shree Ganesh Mangal Karyalay Dharashiv",
-                  address: "Shree Ganesh Mangal Karyalay Dharashiv, Maharashtra 413802",
-                  mapQuery:  "Shree Ganesh Mangal Karyalay Dharashiv, Maharashtra 413802",
-                  description:
-                    "Traditional Maharashtrian wedding ceremony followed by reception",
-                },
-              ].map((event, index) => (
+              {/* Main Card */}
+              <div className="bg-white rounded-2xl shadow-xl p-6 text-center border border-gold/20 hover:shadow-2xl transition-all duration-500 h-full flex flex-col relative overflow-hidden">
+                
+                {/* Gradient Background Effect */}
+                <div className={`absolute inset-0 bg-gradient-to-br ${event.color} opacity-5 group-hover:opacity-10 transition-opacity duration-500`}></div>
+                
+                {/* Animated Icon */}
                 <motion.div
-                  key={index}
-                  className="bg-white rounded-2xl shadow-xl p-8 text-center border border-gold/20 hover:shadow-2xl transition-all duration-500"
-                  initial={{ x: index % 2 === 0 ? -50 : 50, opacity: 0 }}
-                  whileInView={{ x: 0, opacity: 1 }}
-                  transition={{ duration: 0.8, delay: index * 0.2 }}
-                  whileHover={{ y: -10 }}
+                  className={`mb-4 ${event.textColor} relative z-10 bg-transparent`}
+                  variants={iconVariants}
+                  whileHover="hover"
                 >
-                  <h3 className="text-3xl font-cursive text-maroon mb-6">
-                    {event.title}
-                  </h3>
+                  {EventIcons[event.icon]}
+                </motion.div>
 
-                  <div className="space-y-4 mb-6">
-                    <div className="flex items-center justify-center space-x-3">
-                      <span className="text-gold">📅</span>
-                      <span className="font-semibold font-sans">
-                        {event.date}
-                      </span>
-                    </div>
-                    <div className="flex columns-1 items-center justify-center space-x-3">
-                      <div className="flex items-center justify-center space-x-3">
-                        <span className="text-gold">⏰</span>
-                        <span className="font-semibold font-sans">
-                          {event.time}
-                        </span>
-                      </div>
-                      <div className="flex items-center justify-center space-x-3">
-                        <span className="text-gold">📍</span>
-                        <span className="font-semibold font-sans">
-                          {event.location}
-                        </span>
-                      </div>
-                    </div>
+                {/* Event Title */}
+                <motion.h3
+                  className={`text-2xl font-cursive font-semibold mb-4 ${event.textColor} relative z-10`}
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  transition={{ delay: 0.5 }}
+                >
+                  {event.title}
+                </motion.h3>
+
+                {/* Date and Time */}
+                <div className="space-y-3 mb-4 relative z-10">
+                  <motion.div
+                    className="flex items-center justify-center space-x-2"
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.6 }}
+                  >
+                    <span className="text-gold text-lg">📅</span>
+                    <span className="font-semibold font-sans text-gray-700 text-sm">
+                      {event.date}
+                    </span>
+                  </motion.div>
+                  <motion.div
+                    className="flex items-center justify-center space-x-2"
+                    initial={{ opacity: 0, x: 20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.7 }}
+                  >
+                    <span className="text-gold text-lg">⏰</span>
+                    <span className="font-semibold font-sans text-gray-700 text-sm">
+                      {event.time}
+                    </span>
+                  </motion.div>
+                </div>
+
+                {/* Location */}
+                <motion.div
+                  className="mb-4 relative z-10"
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  transition={{ delay: 0.8 }}
+                >
+                  <div className="flex items-center justify-center space-x-2">
+                    <span className="text-gold text-lg">📍</span>
+                    <span className="font-semibold font-sans text-gray-600 text-xs leading-tight">
+                      {event.location}
+                    </span>
                   </div>
+                </motion.div>
 
-                  <p className="text-gray-600 mb-6 font-sans leading-relaxed">
-                    {event.description}
-                  </p>
+                {/* Description */}
+                <motion.p
+                  className="text-gray-600 mb-4 font-sans leading-relaxed text-sm flex-grow relative z-10"
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  transition={{ delay: 0.9 }}
+                >
+                  {event.description}
+                </motion.p>
 
-                  {/* Interactive Map Section */}
-                  <div className="bg-gray-100 rounded-lg p-4">
+                {/* Decorative Elements */}
+                <div className="absolute top-2 right-2 w-8 h-8 border-t-2 border-r-2 border-gold/30 rounded-tr-2xl"></div>
+                <div className="absolute bottom-2 left-2 w-8 h-8 border-b-2 border-l-2 border-gold/30 rounded-bl-2xl"></div>
+
+                {/* Hover Effect Border */}
+                <div className={`absolute inset-0 rounded-2xl border-2 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ${event.color.replace('from-', 'border-').replace(' to-', '/20')}`}></div>
+              </div>
+
+              {/* Floating Particles */}
+              <motion.div
+                className="absolute -top-2 -right-2 text-2xl opacity-0 group-hover:opacity-100"
+                animate={{
+                  y: [0, -10, 0],
+                  rotate: [0, 180, 360]
+                }}
+                transition={{
+                  duration: 3,
+                  repeat: Infinity,
+                  delay: index * 0.5
+                }}
+              >
+                ✨
+              </motion.div>
+            </motion.div>
+          ))}
+        </motion.div>
+
+        
+      </div>
+        
+       
+
+      {/* Interactive Map Section */}
+                  <div className="bg-gray-100 mt-12 rounded-lg p-4">
                     <div className="h-64 rounded-lg overflow-hidden relative group">
                       <iframe
-                        src={`https://www.google.com/maps/embed/v1/place?key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8&q=${event.mapQuery}&zoom=14&maptype=roadmap`}
+                        src={`https://www.google.com/maps/embed/v1/place?key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8&q=Shree Ganesh Mangal Karyalay Dharashiv, Maharashtra 413802&zoom=14&maptype=roadmap`}
                         width="100%"
                         height="100%"
                         style={{ border: 0, borderRadius: "8px" }}
@@ -316,9 +630,7 @@ const opacity = useTransform(scrollYProgress, [0, 1.5], [1, 0]);
                     <div className="flex flex-col sm:flex-row justify-between items-center mt-4 gap-3">
                       <div className="flex space-x-2">
                         <a
-                          href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(
-                            event.address
-                          )}`}
+                          href={`https://www.google.com/maps/dir/?api=1&destination=Shree Ganesh Mangal Karyalay Dharashiv, Maharashtra 413802`}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="inline-flex items-center bg-maroon text-black px-4 py-2 rounded-lg text-sm font-semibold font-sans hover:bg-maroon/90 transition-all duration-300 shadow-md"
@@ -346,13 +658,11 @@ const opacity = useTransform(scrollYProgress, [0, 1.5], [1, 0]);
                         </a>
                       </div>
                     </div>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
+                    </div>
+
         </section>
-       
+
+
         <GallerySlider />
         <HowWeMet/>
         <VideoBackground />
