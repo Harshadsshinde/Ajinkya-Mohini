@@ -145,7 +145,7 @@ const opacity = useTransform(scrollYProgress, [0, 1.5], [1, 0]);
                 animate={{ opacity: 1 }}
                 transition={{ delay: 1, duration: 1 }}
               >
-                <div className="flex justify-center space-x-4 md:space-x-8">
+                <div className="flex justify-center  ml-1 mr-1 space-x-4 md:space-x-8">
                   {Object.entries(timeLeft).map(([unit, value]) => (
                     <div key={unit} className="text-center">
                       <div className="bg-white/20 backdrop-blur-sm rounded-lg p-4 min-w-20">
