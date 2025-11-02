@@ -4,7 +4,7 @@ import img6 from '../assets/img6.jpg';
 
 const HowWeMet = () => {
   return (
-    <section id="how-we-met" className="py-20 px-6 bg-gradient-to-br bg-white">
+    <section id="how we met"  className="py-20 px-6 bg-gradient-to-br bg-white">
       <div className="max-w-6xl mx-auto">
         {/* Section Header */}
         <motion.div
@@ -83,10 +83,10 @@ const HowWeMet = () => {
       👶
     </div>
     <h3 className="text-xl md:text-2xl font-playfair font-semibold text-rose-800 mb-3 ml-8">
-      From Childhood Friends to Soulmates
+       We know each other from childhood
     </h3>
     <p className="text-sm md:text-base text-gray-700 leading-relaxed ml-8">
-      We know each other from childhood. We met many times but we never thought 
+       We met many times but we never thought 
       that it would turn into one of the best relationships. 
       <span className="inline-block mt-2 text-rose-600 font-medium">💕</span>
     </p>
