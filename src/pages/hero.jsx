@@ -282,24 +282,32 @@ const handleNavClick = (sectionId) => {
                 className="text-navy hover:text-gold transition-all duration-300 p-2 relative z-60"
                 aria-label="Toggle menu"
               >
-                {/* Hamburger Icon - Fixed visibility */}
-                <div className="w-6 h-6 flex flex-col justify-between relative">
-                  <motion.span
-                    className="w-6 h-0.5 bg-black rounded-full block"
-                    animate={isMenuOpen ? { rotate: 45, y: 8 } : { rotate: 0, y: 0 }}
-                    transition={{ duration: 0.3 }}
-                  />
-                  <motion.span
-                    className="w-6 h-0.5 bg-black rounded-full block"
-                    animate={isMenuOpen ? { opacity: 0 } : { opacity: 1 }}
-                    transition={{ duration: 0.3 }}
-                  />
-                  <motion.span
-                    className="w-6 h-0.5 bg-black rounded-full block"
-                    animate={isMenuOpen ? { rotate: -45, y: -8 } : { rotate: 0, y: 0 }}
-                    transition={{ duration: 0.3 }}
-                  />
-                </div>
+     {/* Hamburger / Close Icon */}
+<div
+  className="w-6 h-6 relative flex items-center justify-center cursor-pointer"
+  onClick={toggleMenu}
+>
+  {/* Top line */}
+  <motion.span
+    className="absolute w-6 h-0.5 bg-black rounded-full"
+    animate={isMenuOpen ? { rotate: 45 } : { rotate: 0, y: -6 }}
+    transition={{ duration: 0.3, ease: "easeInOut" }}
+  />
+  {/* Middle line */}
+  <motion.span
+    className="absolute w-6 h-0.5 bg-black rounded-full"
+    animate={isMenuOpen ? { opacity: 0 } : { opacity: 1 }}
+    transition={{ duration: 0.2 }}
+  />
+  {/* Bottom line */}
+  <motion.span
+    className="absolute w-6 h-0.5 bg-black rounded-full"
+    animate={isMenuOpen ? { rotate: -45 } : { rotate: 0, y: 6 }}
+    transition={{ duration: 0.3, ease: "easeInOut" }}
+  />
+</div>
+
+
               </button>
             </div>
           </div>
@@ -308,30 +316,31 @@ const handleNavClick = (sectionId) => {
           <AnimatePresence>
             {isMenuOpen && (
               <motion.div
-                className="md:hidden bg-cream/98 bg-white backdrop-blur-lg text-black border-t border-gold/20 absolute top-full left-0 right-0 shadow-lg"
-                initial={{ opacity: 0, height: 0 }}
-                animate={{ opacity: 1, height: "auto" }}
-                exit={{ opacity: 0, height: 0 }}
-                transition={{ duration: 0.3 }}
-              >
-                <div className="container mx-auto px-4 py-4">
-                  <div className="flex flex-col space-y-3">
-                    {menuItems.map((item, index) => (
-                      <motion.button
-                        key={item.id}
-                        onClick={() => handleNavClick(item.id)}
-                        className="text-navy hover:text-gold transition-all duration-300 font-semibold tracking-wider text-base uppercase py-3 border-b border-gold/10 text-left"
-                        initial={{ opacity: 0, x: -20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: index * 0.1 }}
-                        whileHover={{ x: 10 }}
-                      >
-                        {item.name}
-                      </motion.button>
-                    ))}
-                  </div>
-                </div>
-              </motion.div>
+  className="md:hidden bg-black/80 backdrop-blur-lg text-white/90 border-t border-white/20 absolute top-full left-0 right-0 shadow-lg"
+  initial={{ opacity: 0, height: 0 }}
+  animate={{ opacity: 1, height: "auto" }}
+  exit={{ opacity: 0, height: 0 }}
+  transition={{ duration: 0.3 }}
+>
+  <div className="container mx-auto px-4 py-4">
+    <div className="flex flex-col space-y-3 text-center">
+      {menuItems.map((item, index) => (
+        <motion.button
+          key={item.id}
+          onClick={() => handleNavClick(item.id)}
+          className="text-white/80 hover:text-white transition-all duration-300 font-semibold tracking-wider text-base uppercase py-3 border-b border-white/10"
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ delay: index * 0.1 }}
+          whileHover={{ x: 10 }}
+        >
+          {item.name}
+        </motion.button>
+      ))}
+    </div>
+  </div>
+</motion.div>
+
             )}
           </AnimatePresence>
         </motion.nav>
