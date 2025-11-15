@@ -16,6 +16,7 @@ import haldiImg from "../assets/haldhi1.png";
 import wedding from "../assets/wedding1.png";
 import mehandi from "../assets/mehandi1.png";
 import sangeet from "../assets/sangeet.png";
+import WeddingBook from "./WeddingBook";
 
 
 function Hero() {
@@ -671,13 +672,13 @@ const handleNavClick = (sectionId) => {
 
         </section>
 
-
+        {/* <WeddingBook/> */}
         <GallerySlider />
         <HowWeMet/>
         <VideoBackground />
        
         {/* Highlights Section */}
-        <section
+        {/* <section
           id="highlights"
           className="py-20 px-6 bg-gradient-to-b from-cream to-maroon text-black"
         >
@@ -718,7 +719,7 @@ const handleNavClick = (sectionId) => {
               </div>
             </motion.div>
           </div>
-        </section>
+        </section> */}
      
         {/* Footer */}
         <footer className="bg-navy text-cream py-12 mt-0 text-center">
