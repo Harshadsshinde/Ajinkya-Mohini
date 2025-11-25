@@ -165,7 +165,7 @@ const handleNavClick = (sectionId) => {
     {
       title: "Wedding",
       date: "November 30, 2025",
-      time: "12:23 PM",
+      time: "12:25 PM",
       location: "Shree Ganesh Mangal Karyalay Dharashiv",
       address: "Shree Ganesh Mangal Karyalay Dharashiv, Maharashtra 413802",
       mapQuery: "Shree Ganesh Mangal Karyalay Dharashiv, Maharashtra 413802",
